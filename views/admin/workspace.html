@@ -1,0 +1,48 @@
+<title>Anna Sui Backend</title>
+<?php include 'views/admin/menu.html';?>
+<div ng-app="app" ng-controller="controller">
+	<div>
+		<input type="text" placeholder="查询" ng-model="name"/>
+	</div>
+	
+	<div ng-init="loading()">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>姓名</th>
+				<th>手机</th>
+				<th>修改时间</th>
+				<th>操作</th>
+			</tr>
+			<tr ng-repeat="pro in profile | filter:name">
+				<td>{{pro.id}}</td>
+				<td>{{pro.name}}</td>
+				<td>{{pro.phone}}</td>
+				<td>{{pro.udate}}</td>
+				<td><a href="javascript:void(0);" ng-click="update(pro.id)">编辑</a><a href="javascript:void(0);" ng-click="del(pro.id)">删除</a></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div>
+		<div>{{title || '新增'}}操作界面</div>
+		<form ng-submit="add()">
+			<div ng-show="formData.id" >
+				ID:
+				<input type="text" name="id" placeholder="姓名" readonly ng-model="formData.id"/>
+			</div>
+			<div>
+				姓名：
+				<input type="text" name="name" placeholder="姓名" required ng-model="formData.name"/>
+			</div>
+			<div>
+				手机：
+				<input type="text" name="phone" placeholder="手机" required ng-model="formData.phone"/>
+			</div>
+			<div>
+				<button type="submit">{{title || '新增'}}</button>
+				<button type="reset" ng-click="clear()">清空</button>
+			</div>
+		</form>
+	</div>
+</div>
