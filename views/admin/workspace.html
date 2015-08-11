@@ -25,9 +25,13 @@
 				<td><a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" ng-click="update(pro.id)">编辑</a>&nbsp;&nbsp;<a href="javascript:void(0);" ng-click="del(pro.id)">删除</a></td>
 			</tr>
 		</table>
-		<div class="text-center" ng-if="more">
-			<button class="btn btn-default" ng-click="addMore()">加载更多</button>
-		</div>
+		<nav>
+			<ul class="pager">
+				<li ng-if="page>0"><a href="javascript:void(0);" ng-click="previous()">上一页</a></li>
+				<li ng-if="more"><a href="javascript:void(0);" ng-click="addMore(false)">下一页</a></li>
+				<li ng-if="more"><a href="javascript:void(0);" ng-click="addMore(true)">加载更多</a></li>
+			</ul>
+		</nav>
 	</div>
 	
 

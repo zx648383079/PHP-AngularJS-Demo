@@ -35,13 +35,13 @@ login.controller("loginController",["$scope","$http","$window","$interval","$tim
 
 //wordspace页面
 var app=angular.module("app",[]);
-app.controller("controller",["$scope","$http",function($scope,$http){
+app.controller("controller",["$scope","$http","$window",function($scope,$http,$window){
 	$scope.profile=new Array;
 	
 	$scope.title="新增";
 	
 	$scope.more=false;
-	$scope.page=0;
+	$scope.page=getVal("page");
 	
 	$scope.loading=function()
 	{
@@ -156,14 +156,30 @@ app.controller("controller",["$scope","$http",function($scope,$http){
 	};
 	
 	//加载更多
-	$scope.addMore=function()
+	$scope.addMore=function(add)
 	{
 		if($scope.more)
 		{
 			$scope.page++;
-			$scope.loading();
+			if(add)
+			{
+				$scope.loading();
+			}else
+			{
+				$window.location.href=APP_URL+"workspace.php?page="+$scope.page;
+			}
 		}	
 	}
+	
+	$scope.previous=function()
+	{
+		if($scope.page>0)
+		{
+			$scope.page--;
+			$window.location.href=APP_URL+"workspace.php?page="+$scope.page;
+		}
+	}
+	
 }]);
 
 //自定义筛选
@@ -244,4 +260,11 @@ function topost(data)
 	}
 	
 	return str;
-}
+};
+//获取url的参数
+function getVal(name) {
+var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+var r = window.location.search.substr(1).match(reg);
+if (r != null) return unescape(r[2]); return 0;
+} 
+
