@@ -32,9 +32,23 @@ class workspaceAction extends Common {
 	function getList()
 	{
 		$_collect = new collect();
-		$sql="SELECT `id`,`name`,`phone`,`udate` FROM `".DB_TABLEPRE."profile`";
+		
+		$sqlpage = "SELECT COUNT(tp.uid) AS pnumber FROM `".DB_TABLEPRE."profile` tp";
+		$pagedata = $_collect->findObject($sqlpage);
+		$total = $pagedata['pnumber'];
+		
+		$page=isset($_GET['page'])?$_GET['page']:0;
+		$index=$page*5;
+		
+		$sql="SELECT `id`,`name`,`phone`,`udate` FROM `".DB_TABLEPRE."profile` order by `id` limit {$index},5";
 		$list = $_collect->findList($sql);
-		die(ajax_return(ajax_success(null, $list)));
+		
+		
+		
+		die(ajax_return(ajax_success(null, array(
+			'data'=>$list,
+			'more'=>($total > ($index+5))
+			))));
 	}
 	
 	//POST提交数据后执行的操作
@@ -83,10 +97,18 @@ class workspaceAction extends Common {
 			'phone' => $phone,
 			'udate' => getDateTime(time())
 		);
-		$_profile->save ( $data );
+		
+		
+		$id=$_profile->save ( $data );
 		
 		die ( ajax_return ( ajax_success ('', array(
-			'status' => 0
+			'status' => 0,
+			'data'=>array(
+				'id'=>$id,
+				'name'=>$name,
+				'phone' => $phone,
+				'udate' => $data['udate']
+			)
 		)) ) );
 	}
 	
@@ -123,7 +145,13 @@ class workspaceAction extends Common {
 		$_profile->save ( $data );
 		
 		die ( ajax_return ( ajax_success ('', array(
-			'status' => 0
+			'status' => 0,
+			'data'=>array(
+				'id'=>$id,
+				'name'=>$name,
+				'phone' => $phone,
+				'udate' => $data['udate']
+			)
 		)) ) );
 	}
 	
