@@ -103,6 +103,7 @@ app.controller("controller",["$scope","$http","$window",function($scope,$http,$w
 	};
 	//表单数据
 	$scope.formData={};
+	
 	//新增或修改数据
 	$scope.add=function()
 	{
@@ -155,7 +156,7 @@ app.controller("controller",["$scope","$http","$window",function($scope,$http,$w
 		$scope.formData={};
 	};
 	
-	//加载更多
+	//加载更多 和 下一页
 	$scope.addMore=function(add)
 	{
 		if($scope.more)
@@ -170,7 +171,7 @@ app.controller("controller",["$scope","$http","$window",function($scope,$http,$w
 			}
 		}	
 	}
-	
+	//上一页
 	$scope.previous=function()
 	{
 		if($scope.page>0)
@@ -233,7 +234,7 @@ feedback.controller("fbController",["$scope","$http","$timeout",function($scope,
 }]);
 
 
-//把数组转成能提交的数据
+//把数组转成能POST提交的数据
 function topost(data)
 {
 	var str="";
@@ -261,6 +262,7 @@ function topost(data)
 	
 	return str;
 };
+
 //获取url的参数
 function getVal(name) {
 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");

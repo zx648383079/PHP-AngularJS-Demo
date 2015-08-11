@@ -1,3 +1,9 @@
+说明
+=====
+
+主要修改 `Workspace.php` 、 `Workspace.html` 、`controller.js`
+
+
 操作步骤
 =======
 
@@ -10,3 +16,9 @@
 4.启用php.ini文件中的openssl
 
 5.js 路径不能有 “-” 字符
+
+
+更新时间
+======
+
+2015/8/11
