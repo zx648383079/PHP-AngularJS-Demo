@@ -63,7 +63,7 @@ function render_admin($file_name, $params = array ()) {
 	
 	$file_name .= '.html';
 	
-	$__title = getViewsTitle ( $file_name );
+	$__title = getViewsTitle ('admin/'.$file_name );
 	
 	include 'views/admin/header.html';
 	include 'views/admin/' . $file_name;

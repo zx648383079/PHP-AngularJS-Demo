@@ -59,14 +59,14 @@
 				<thead>
 					<tr>
 						<th colspan="8">
-							<div class="pagination pagination-small">
-								<ul>
-									<li><a href="<?php echo APP_URL;?>backend.php?page=<?php echo $page-1;?>">previous</a></li>
-									<li><a href="javascript:void(0);"><?php echo $page;?>/<?php echo $pagenum;?></a></li>
-									<li><a href="<?php echo APP_URL;?>backend.php?page=<?php $pages = $page == $pagenum ? $pagenum : $page+1; echo $pages;?>">next</a></li>
-									<li><a href="javascript:void(0);">Total: <?php echo $total;?></a></li>
-								</ul>
-							</div>
+							<nav>
+							  <ul class="pager">
+							    <li><a href="<?php echo APP_URL;?>backend.php?page=<?php echo $page-1;?>">Previous</a></li>
+								<li><a href="javascript:void(0);"><?php echo $page;?>/<?php echo $pagenum;?></a></li>
+							    <li><a href="<?php echo APP_URL;?>backend.php?page=<?php $pages = $page == $pagenum ? $pagenum : $page+1; echo $pages;?>">Next</a></li>
+							  	<li><a href="javascript:void(0);">Total: <?php echo $total;?></a></li>
+							  </ul>
+							</nav>
 						</th>
 					</tr>
 				</thead>
