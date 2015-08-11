@@ -77,7 +77,36 @@ app.controller("controller",["$scope","$http",function($scope,$http){
 	}
 	
 }]);
-
+//自定义筛选
+app.filter("myFilter",function()
+{
+	return function(input,name)
+	{
+		//input 是内部的数组 $scope.profile
+		//console.log("input=",input); 
+		//console.log("name=",name); 
+		var output=[];
+		if(name!=null && name !="" && name !=undefined)
+		{
+			angular.forEach(input,function(v,k)
+			{
+				if(v.name.contains(name) || v.phone.contains(name))
+				{
+					output.push(v);
+				}
+			});
+			
+		}else{
+			angular.forEach(input,function(v,k)
+			{
+				output.push(v);
+			});
+		}
+		//console.log("output=",output); 
+		return output;
+	}
+});
+	
 //把数组转成能提交的数据
 function topost(data)
 {

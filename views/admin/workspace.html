@@ -2,7 +2,7 @@
 <?php include 'views/admin/menu.html';?>
 <div ng-app="app" ng-controller="controller">
 	<div>
-		<input type="text" placeholder="查询" ng-model="search.name"/>
+		<input type="text" placeholder="查询姓名/手机" ng-model="name"/>
 	</div>
 	
 	<div ng-init="loading()">
@@ -14,7 +14,7 @@
 				<th>修改时间</th>
 				<th>操作</th>
 			</tr>
-			<tr ng-repeat="pro in profile | filter:search:strict">
+			<tr ng-repeat="pro in profile | myFilter:name">
 				<td>{{pro.id}}</td>
 				<td>{{pro.name}}</td>
 				<td>{{pro.phone}}</td>
