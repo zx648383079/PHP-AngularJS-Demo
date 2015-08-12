@@ -74,7 +74,7 @@ class Model {
 	 * @return 返回查询结果,
 	 */ 
 	public function getList( Array $_param = array(),Array $_fileld=array()) {  
-        $_limit = $_order =$_group = $_where='';  
+        $_limit = $_order =$_group = $_where=$_join='';  
         if (is_array($_param) && !empty($_param)) {  
             $_limit = isset($_param['limit']) ? 'LIMIT '.$_param['limit'] : '';  
             $_order = isset($_param['order']) ? 'ORDER BY '.$_param['order'] : '';  
@@ -100,12 +100,22 @@ class Model {
                     }
                 }  
             }
+			
+			//进行进行join添加
+    		$joinkey=array('left','right','inner');
+    		foreach($joinkey as $value)
+    		{
+    			$_join.=isset($_param[$value])?strtoupper($value).' JOIN '.$_param[$value][0].' ON '.$_param[$value][1].' ':'';
+    		}
+			
         }  
         $_selectFields = empty($_fileld)?"*":implode(',', $_fileld);  
-        $_sql = "SELECT $_selectFields FROM {$this->_table_name} $_where $_group $_order $_limit"; 
+        $_sql = "SELECT $_selectFields FROM {$this->_table_name} $_join $_where $_group $_order $_limit"; 
 		
 		return $this->findList($_sql);
 	}
+	
+	
 	
 	public function setField($field, $value) {
 		if (isset ($this->data) && isset ($this->data-> { $field })){

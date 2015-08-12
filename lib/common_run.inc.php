@@ -14,6 +14,7 @@ require_once ('lib/fun_wechat.inc.php');
 require_once ('lib/models/model.model.php');
 
 require_once ('lib/helper/MobileHelper.php');
+require_once ('lib/helper/Mobile_Detect.php');
 
 error_reporting ( E_ALL & ~ E_NOTICE ); // 0 E_ALL
 //error_reporting ( E_ALL );
