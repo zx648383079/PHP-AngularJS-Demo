@@ -2,75 +2,45 @@
 require_once ('lib/common_run.inc.php');
 
 $urls = array (
-	'.*'	=> 'workspaceAction' 
+	'.delete' => 'deleteAction',
+	'.getList'=> 'getListAction',
+	'.update' => 'updateAction',
+	'.add'	  => 'addAction',
+	'.*'	  => 'workspaceAction' 
 );
 //工作空间
 class workspaceAction extends Common {
 	//GET执行的操作
 	function GET()
 	{
-		
-		$mode=isset($_GET['mode'])?$_GET['mode']:0;
-		switch($mode)
-		{
-			case 0:
-				render_admin ( 'workspace');
-				break;
-			case 1:
-				$this->getList();
-				break;
-			case 3:
-				$this->del();
-				break;
-			default:
-				render_admin ( 'workspace');
-				break;
-		}
+		render_admin ( 'workspace');
 	}
-	
+}	
+
+class getListAction extends Common{
 	//展示数据
-	function getList()
+	function GET()
 	{
-		$_collect = new collect();
+		$_profile = new profile();
+		$total = $_profile->getCount();
 		
-		$sqlpage = "SELECT COUNT(tp.uid) AS pnumber FROM `".DB_TABLEPRE."profile` tp";
-		$pagedata = $_collect->findObject($sqlpage);
-		$total = $pagedata['pnumber'];
 		
 		$page=isset($_GET['page'])?$_GET['page']:0;
 		$index=$page*5;
 		
-		$sql="SELECT `id`,`name`,`phone`,`udate` FROM `".DB_TABLEPRE."profile` order by `id` limit {$index},5";
-		$list = $_collect->findList($sql);
-		
-		
+		$list = $_profile->getListByPage($index,5);
 		
 		die(ajax_return(ajax_success(null, array(
 			'data'=>$list,
 			'more'=>($total > ($index+5))
 			))));
 	}
-	
-	//POST提交数据后执行的操作
-	function POST()
-	{
-		$mode=isset($_GET['mode'])?$_GET['mode']:0;
-		switch($mode)
-		{
-			case 2:
-				$this->add();
-				break;
-			case 4:
-				$this->update();
-				break;
-			default:
-				render_admin ( 'workspace');
-				break;
-		}
-	}
+}	
+
+class addAction extends Common{
 	
 	//增加数据
-	function add()
+	function POST()
 	{
 		//获取用户id
 		$uid = getUid();
@@ -110,10 +80,12 @@ class workspaceAction extends Common {
 				'udate' => $data['udate']
 			)
 		)) ) );
-	}
-	
+	}	
+}
+
+class deleteAction extends Common{
 	//删除操作
-	function del()
+	function GET()
 	{
 		if(isset($_GET['id']))
 		{
@@ -124,9 +96,12 @@ class workspaceAction extends Common {
 		}
 		die(ajax_return(ajax_success(null, array('status'=>10))));
 	}
-	
+}
+
+class updateAction extends Common{	
+
 	//修改操作
-	function update()
+	function POST()
 	{
 		$id=$_POST['id'];
 		

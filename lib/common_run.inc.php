@@ -37,7 +37,7 @@ function __autoload($class) {
 function db() {
 	static $_dbx = null;
 	if (! isset ( $_dbx )) {
-		$dbDsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME;
+		$dbDsn = 'mysql:host=' . DB_HOST . ';port='.DB_PORT.';dbname=' . DB_NAME;
 		$_dbx = new dbx ( $dbDsn, DB_USER, DB_PASSWORD );
 	}
 	return $_dbx;

@@ -1,38 +1,4 @@
 /// <reference path="../../typings/angularjs/angular.d.ts"/>
-//login页面
-var login=angular.module("login",[]);
-login.controller("loginController",["$scope","$http","$window","$interval","$timeout",function($scope,$http,$window,$interval,$timeout){
-	$scope.loginForm={username:"admin"};
-	$scope.sign=function()
-	{
-		$http.post(APP_URL+"admin.php",topost($scope.loginForm),{headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
-        .success(function(data) {
-			if(data["success"])
-			{
-				var i=5;
-				var a=$interval(function()
-					{
-						if(i==0)
-						{
-							$window.location.href=APP_URL+"backend.php";
-							$interval.cancel(a);
-						}else{
-							$scope.msg="登录成功！将在 "+i+" 秒后进入……";
-						}
-						i--;
-					},1000);
-			}else{
-				$scope.loginForm.password="";
-				$scope.msg=data["msg"];
-				var tim=$timeout(function(){
-					$scope.msg="";
-					$timeout.cancel(tim);
-				},2000);
-			}
-		});
-	}
-}]);
-
 //wordspace页面
 var app=angular.module("app",[]);
 app.controller("controller",["$scope","$http","$window",function($scope,$http,$window){
@@ -45,7 +11,7 @@ app.controller("controller",["$scope","$http","$window",function($scope,$http,$w
 	
 	$scope.loading=function()
 	{
-		$http.get(APP_URL+"workspace.php?mode=1&page="+$scope.page).success(function(data)
+		$http.get(APP_URL+"workspace.php/getList?page="+$scope.page).success(function(data)
 			{
 				angular.forEach(data["data"]['data'],function(v,k)
 					{
@@ -77,7 +43,7 @@ app.controller("controller",["$scope","$http","$window",function($scope,$http,$w
 	//点击“删除”
 	$scope.del=function(id)
 	{
-		$http.get(APP_URL+"workspace.php?mode=3&id="+id).success(function(data)
+		$http.get(APP_URL+"workspace.php/delete?&id="+id).success(function(data)
 			{
 				switch(data["data"]["status"])
 				{
@@ -108,10 +74,10 @@ app.controller("controller",["$scope","$http","$window",function($scope,$http,$w
 	$scope.add=function()
 	{
 		var mode=true;
-		var url='workspace.php?mode=2';
+		var url='workspace.php/add';
 		if($scope.formData.id != null && $scope.formData.id != undefined)
 		{
-			url="workspace.php?mode=4";
+			url="workspace.php/update";
 			mode=false;
 		}
 		$http.post(APP_URL+url,topost($scope.formData),{headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
@@ -211,62 +177,8 @@ app.filter("myFilter",function()
 	}
 });
 
-var feedback=angular.module("feedback",[]);
-feedback.controller("fbController",["$scope","$http","$timeout",function($scope,$http,$timeout){
-	$scope.fbForm={kind:0};
-	$scope.submit=function()
-	{
-		$http.post(APP_URL+"feedback.php",topost($scope.fbForm),{headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
-        .success(function(data) {
-			if (data["success"]) {
-				$scope.fbForm.message="";
-				$scope.msg="发送成功！";
-			}else{
-				$scope.msg="发送失败！";
-			}
-			var tim = $timeout(function(){
-				$scope.msg="";
-				$timeout.cancel(tim);
-			},2000);
-			
-		});
-	}
-}]);
 
 
-//把数组转成能POST提交的数据
-function topost(data)
-{
-	var str="";
-	
-	if(data instanceof Object)
-	{
-		for(var key in data)
-		{
-			var v=data[key];
-			if(typeof v === "string")
-			{
-				v=v.replace(/\ +/g,"");
-				v=v.replace(/[\r\n]/g,"<br/>");
-			}
-			if(str=="")
-			{
-				str=key+"="+v;
-			}else{
-				str+="&"+key+"="+v;
-			}
-		}
-	}else{
-		str=data;
-	}
-	
-	return str;
-};
 
-//获取url的参数
-function getVal(name) {
-var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-var r = window.location.search.substr(1).match(reg);
-if (r != null) return unescape(r[2]); return 0;
-} 
+
 

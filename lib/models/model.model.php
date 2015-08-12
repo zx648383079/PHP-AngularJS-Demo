@@ -58,6 +58,54 @@ class Model {
 			return $this->data-> { $field };
 		}
 	}
+	//获取表数据的行数
+	public function getCount()
+	{
+		$sql="SELECT COUNT(*) as num FROM $this->_table_name";
+		return $this->findObject($sql)['num'];
+	}
+	 /**
+	 * 得到查询的数据
+	 *
+	 * @access public
+	 *
+     * @param array $_fileld 要显示的字段
+     * @param array|null $_param 条件
+	 * @return 返回查询结果,
+	 */ 
+	public function getList( Array $_param = array(),Array $_fileld=array()) {  
+        $_limit = $_order =$_group = $_where='';  
+        if (is_array($_param) && !empty($_param)) {  
+            $_limit = isset($_param['limit']) ? 'LIMIT '.$_param['limit'] : '';  
+            $_order = isset($_param['order']) ? 'ORDER BY '.$_param['order'] : '';  
+            $_group = isset($_param['group']) ? 'GROUP BY '.$_param['group'] : '';  
+            if (isset($_param['where'])) {  
+                foreach ($_param['where'] as $_key=>$_value) {  
+                    if(empty($_where))
+                    {
+                        $_where='WHERE '.$_value;
+                    }else{
+                        if(is_array($_value))
+                        {
+                            switch($_value[1])
+                            {
+                                case "or":
+                                    $_where .= ' OR '.$_value;
+                                case "and":
+                                    $_where .= ' AND '.$_value;
+                            }
+                        }else{
+                            $_where .= ' AND '.$_value;
+                        }
+                    }
+                }  
+            }
+        }  
+        $_selectFields = empty($_fileld)?"*":implode(',', $_fileld);  
+        $_sql = "SELECT $_selectFields FROM {$this->_table_name} $_where $_group $_order $_limit"; 
+		
+		return $this->findList($_sql);
+	}
 	
 	public function setField($field, $value) {
 		if (isset ($this->data) && isset ($this->data-> { $field })){

@@ -30,5 +30,19 @@ class profile extends Model {
 		);
 		return $this->findList ( $sql, $param );
 	}
+	//根据开始位置和取的个数去结果
+	public function getListByPage($start,$count)
+	{
+		$where=array(
+			'order'=>'id',
+			'limit'=>$start.','.$count
+		);
+		
+		$fileld=array(
+			'id','name','phone','udate'
+		);
+		
+		return $this->getList($where,$fileld);
+	}
 }
 ?>
