@@ -21,10 +21,8 @@
 
 4.启用php.ini文件中的openssl
 
-<<<<<<< HEAD
 =======
 
->>>>>>> origin/master
 
 更新时间
 ======
