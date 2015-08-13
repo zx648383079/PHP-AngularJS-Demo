@@ -34,15 +34,15 @@ class profile extends Model {
 	public function getListByPage($start,$count)
 	{
 		$where=array(
+			'select'=>array(
+				'id','name','phone','udate'
+			),
+			'from'=>$this->_table_name,
 			'order'=>'id',
 			'limit'=>$start.','.$count
 		);
 		
-		$fileld=array(
-			'id','name','phone','udate'
-		);
-		
-		return $this->getList($where,$fileld);
+		return $this->getList($where);
 	}
 }
 ?>
