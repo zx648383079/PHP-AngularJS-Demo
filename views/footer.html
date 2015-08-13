@@ -4,7 +4,7 @@
 		    	<div class="masking" style="display:none;">
                 	<div class="share-word"></div>
                     <div class="share-arrow"></div>
-                    <img src="<?php echo APP_URL;?>images/qr-code.png" class="qr-code"/>
+                    <img src="<?php echo APP_URL;?>asset/img/qr-code.png" class="qr-code"/>
                     <div class="masking-word"></div>
                 </div>
 		        <section class="bottom"></section>
@@ -26,7 +26,7 @@
 		<div class="swiper-slide two-code" id="panel-qrcode">
             <a class="pop-suc suc2"></a>
             <div class="code-word word2" style="opacity:0;"></div>
-			<img class="qr-code" style="opacity:0;" src="<?php echo APP_URL;?>images/qr-code.png"/>
+			<img class="qr-code" style="opacity:0;" src="<?php echo APP_URL;?>asset/img/qr-code.png"/>
 			<div class="confirm"></div>
 		</div>
 		
@@ -34,7 +34,7 @@
 		
 		<div class="swiper-slide form-page" id="panel-form" style="overflow-y: auto;">
 			<div class="form-word">
-				<img src="<?php echo APP_URL;?>images/form_word.png" />
+				<img src="<?php echo APP_URL;?>asset/img/form_word.png" />
 			</div>
 		    <div class="form-input name">
 		    	<span class="name-bg"></span>
@@ -44,7 +44,7 @@
 		    	<span class="tel-bg"></span>
 		        <input type="text" id="input-phone" value="<?php if(isset($phone)){echo $phone;}?>" maxlength="13"/>
 		    </div>
-		    <img src="<?php echo APP_URL;?>images/submit_btn.png" class="submit" />
+		    <img src="<?php echo APP_URL;?>asset/img/submit_btn.png" class="submit" />
 		    <div class="pop popup01" style="display:none;">
 		    	<a href="javascript:;" class="pop-close"></a>
 		    </div>
@@ -59,7 +59,7 @@
 		<div class="swiper-slide two-code" id="panel-qrcode">
 			<a class="pop-suc"></a>
 			<div class="code-word" style="opacity:0;"></div>
-			<img class="qr-code" style="opacity:0;" src="<?php echo APP_URL;?>images/qr-code.png"/>
+			<img class="qr-code" style="opacity:0;" src="<?php echo APP_URL;?>asset/img/qr-code.png"/>
 			<div class="confirm"></div>
 		</div>
 		
@@ -90,7 +90,7 @@ wx.config({debug: false, appId: '<?php echo $signPackage["appId"];?>', timestamp
 <?php }?>
 <script type="text/javascript">
 window.ontouchmove = function(event){event.preventDefault();};
-var PRELOAD_IMAGES = [<?php if(isset($imgpreload)){echo $imgpreload;}?>]; //Images preload
+var PRELOAD_asset/img = [<?php if(isset($imgpreload)){echo $imgpreload;}?>]; //asset/img preload
 </script>
 <script src="<?php echo APP_URL;?>js/myApp.js?v=<?php echo VERSION;?>"></script>
 <script type="text/javascript">

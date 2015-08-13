@@ -31,7 +31,7 @@ class indexAction extends Common {
 		
 		//imgpreload
 		$imgpreload = array();
-		ergodicDir('images/', $imgpreload);
+		ergodicDir('asset/img/', $imgpreload);
 		
 		$p = array();
 		$p['imgpreload'] = implode(",", $imgpreload);
