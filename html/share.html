@@ -1,0 +1,81 @@
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="shareModalLabel">分享文件</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active" v-on:click="modeType = 'public'"><a href="#link" aria-controls="link" role="tab" data-toggle="tab">链接分享</a></li>
+                    <li role="presentation" v-on:click="modeType = 'internal'"><a href="#role" aria-controls="role" role="tab" data-toggle="tab">分享到部门</a></li>
+                    <li role="presentation" v-on:click="modeType = 'private'"><a href="#friend" aria-controls="friend" role="tab" data-toggle="tab">分享给好友</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="link">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" v-on:click="create('public')">创建公开链接</button>
+                            </div>
+                            <div class="col-md-8">
+                                <p>（文件会出现在你的分享主页，其他人都能查看下载）</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" v-on:click="create('protected')">创建私密链接</button>
+                            </div>
+                            <div class="col-md-8">
+                                <p>（只有分享的好友能看到，其他人都看不到）</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="role">
+                        <div class="row">
+                            <ul class="zd_role_tree">
+                                <?php foreach ($role as $item):?>
+                                    <?php if (array_key_exists($item['role_id'], $roles)):?>
+                                        <li data-id="<?=$item['role_id']?>">
+                                            <div><?=$roles[$item['role_id']]['name']?></div>
+                                            <?=Tree::makeUl($roles, $item['role_id'])?>
+                                        </li>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="friend">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <ul class="zd_listbox" id="users">
+                                    <li *ngFor="let item of Users" v-on:click="item.select = !item.select" v-bind:class="{'select': item.select}">{{item.Name}}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-2" style="padding-top: 90px;">
+                                <button v-on:click="select" class="btn btn-primary">&gt;&gt;&gt;</button>
+                                <button v-on:click="remove" class="btn btn-primary">&lt;&lt;&lt;</button>
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" v-on:keyup.enter="getUser" v-model="name" type="text" placeholder="请输入姓名回车键添加">
+                                <ul class="zd_listbox" id="selectUsers" style="height: 190px">
+                                    <li *ngFor="let item of SelectUsers" v-on:click="item.select = !item.select" v-bind:class="{'select': item.select}">{{item.Name}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="result">
+                        <div class="row">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" v-show="modeType == 'internal'" class="btn btn-primary">分享到部门</button>
+                <button type="button" v-show="modeType == 'private'" class="btn btn-primary">分享给好友</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

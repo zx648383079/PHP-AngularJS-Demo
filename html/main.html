@@ -1,0 +1,193 @@
+<div class="container-fluid zd_main">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group menu">
+                <a href="<?=Url::to(['/disk'])?>#" class="list-group-item active">
+                    <i class="fa fa-desktop" aria-hidden="true"></i>全部文件
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/1" class="list-group-item">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>图片
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/2" class="list-group-item">
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>文档
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/3" class="list-group-item">
+                    <i class="fa fa-film" aria-hidden="true"></i>视频
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/4" class="list-group-item">
+                    <i class="fa fa-link" aria-hidden="true"></i>种子
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/5" class="list-group-item">
+                    <i class="fa fa-music" aria-hidden="true"></i>音乐
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/6" class="list-group-item">
+                    <i class="fa fa-file-archive-o" aria-hidden="true"></i>其它
+                </a>
+                <a href="<?=Url::to(['share/my'])?>" class="list-group-item">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>我的分享
+                </a>
+                <a href="<?=Url::to(['/trash'])?>" class="list-group-item">
+                    <i class="fa fa-trash" aria-hidden="true"></i>回收站
+                </a>
+            </div>
+
+        </div>
+        <div id="content" class="col-md-10">
+            <div class="row">
+                <div class="col-md-4 zd_new">
+                    <div class="dropdown" *ngIf="!category">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                            上传
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li><a href="#" class="uploadFile">上传文件</a></li>
+                            <li><a href="#">上传文件夹</a></li>
+                        </ul>
+                    </div>
+                    <button *ngIf="!category" class="btn btn-default" data-toggle="modal" data-target="#createModal">
+                        <span class="glyphicon glyphicon-plus"></span>新建文件夹</button>
+                </div>
+                <div class="col-md-offset-6 col-md-2 view-mode">
+                    <button (click)="Refresh()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    <button [ngClass]="{'active': IsList}" (click)="IsList = true"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+                    <button [ngClass]="{'active': !IsList}" (click)="IsList = false"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="row zd_crumb">
+                <div class="col-xs-2" *ngIf="Crumbs.length > 1">
+                    <a href="#" (click)="top">返回上一级</a> |
+                </div>
+                <div class="col-xs-10">
+                    <ol class="breadcrumb">
+                        <li *ngFor="let item of Crumbs; let i = index" [ngClass]="{'active': i == Crumbs.length - 1}">
+                            <a href="#" (click)="level(item)" *ngIf="i < Crumbs.length - 1">{{item.Name}}</a>
+                            <span *ngIf="i == Crumbs.length - 1">{{item.Name}}</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="header">
+                <div *ngIf="IsList && CheckCount <= 0" class="row">
+                    <div class="col-md-1">
+                        <span class="checkbox" (click)="checkAll()" [ngClass]="{'checked': CheckCount == Disks.length}"></span>
+                    </div>
+                    <div class="col-md-6"  (click)="setOrder('name')">
+                        <span>文件名</span>
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-2" (click)="setOrder('size')">
+                        <span>大小</span>
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-3" (click)="setOrder('update_at')">
+                        <span>修改时间</span>
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div *ngIf="!IsList && CheckCount <= 0" class="row">
+                    <div class="col-md-1">
+                        <span class="checkbox" (click)="checkAll" [ngClass]="{'checked': CheckCount == Disks.length}"></span>
+                    </div>
+                </div>
+                <div *ngIf="CheckCount > 0" class="row">
+                    <div class="col-md-1">
+                        <span class="checkbox" (click)="checkAll" [ngClass]="{'checked': CheckCount == Disks.length}"></span>
+                    </div>
+                    <div class="col-md-3" style="font-size: 16px">
+                        已选中 {{ CheckCount }} 个文件/文件夹
+                    </div>
+                    <div class="col-md-8">
+                        <button (click)="shareAll" class="btn btn-default">
+                            <i aria-hidden="true" class="fa fa-share-alt"></i>
+                            分享
+                        </button>
+                        <button (click)="downloadAll" class="btn btn-default">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            下载
+                        </button>
+                        <button (click)="deleteAll" class="btn btn-default">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            删除
+                        </button>
+                        <button (click)="moveAll" class="btn btn-default">
+                            <i class="fa fa-files-o" aria-hidden="true"></i>
+                            复制到
+                        </button>
+                        <button (click)="copyAll" class="btn btn-default">
+                            <i class="fa fa-scissors" aria-hidden="true"></i>
+                            移动到
+                        </button>
+                        <button (click)="rename" class="btn btn-default">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            重命名
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- END HEADER -->
+            <div class="body">
+                <div *ngIf="!IsList" class="zd_list">
+                    <div *ngFor="let item of Disks"  class="row">
+                        <div class="col-md-1">
+                            <span class="checkbox" [ngClass]="{'checked': item.checked}"></span>
+                        </div>
+                        <div (click)="enter(item)" class="col-md-6">
+                            <span [ngClass]="{'zd_s_dir': item.is_dir == 1, 'zd_s_file': item.is_dir != 1}"></span>
+                            <span>{{item.Name}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <span>{{item.Size | size}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span>{{item.update_at}}</span>
+                            <div class="zd_tool">
+                                <i aria-hidden="true" class="fa fa-share-alt"></i>
+                                 <i class="fa fa-download" aria-hidden="true"></i>
+                                <i class="fa fa-scissors" aria-hidden="true"></i>
+                                <i class="fa fa-files-o" aria-hidden="true"></i>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="IsList" class="zd_grid">
+                <div class="row">
+                    <div *ngFor="let item of Disks"  class="col-md-2">
+                        <div  [ngClass]="{'zd_dir': item.Type == 1, 'zd_file': item.is_dir != 1}">
+                            <span class="checkbox" [ngClass]="{'checked': item.Checked}"></span>
+                        </div>
+                        <div class="zd_name">
+                            <a href="#" (click)="enter(item)">{{item.Name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<upload-window></upload-window>
+
+<create-window></create-window>
+
+<folder-window></folder-window>
+
+<share-window></share-window>

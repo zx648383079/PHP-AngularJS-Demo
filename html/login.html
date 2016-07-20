@@ -1,0 +1,36 @@
+<div id="login" class="row">
+<div class="col-md-4 col-md-offset-4">
+    <form class="form-horizontal">
+      <div class="input-group">
+      <span class="input-group-addon" id="user">
+        <i class="fa fa-user"></i>
+      </span>
+      <input type="text" (click)="UserError=''" class="form-control" [(ngModel)]="Username" placeholder="Username" aria-describedby="user">
+    </div>
+    <p class="text-danger" [hidden]="!UserError">{{UserError}}</p>
+
+      <div class="input-group">
+      <span class="input-group-addon" id="password">
+        <i class="fa fa-lock"></i>
+      </span>
+      <input type="password" (click)="PasswordError=''" class="form-control" [(ngModel)]="Password" placeholder="Password" aria-describedby="password">
+    </div>
+    <p class="text-danger" [hidden]="!PasswordError">{{PasswordError}}</p>
+
+      <div class="form-group">
+        <div class=col-md-12>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="Remember"> Remember me
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-6">
+          <button type="submit" (click)="Login()" class="btn btn-default">Sign in</button>
+        </div>
+      </div>
+    </form>
+</div>
+</div>

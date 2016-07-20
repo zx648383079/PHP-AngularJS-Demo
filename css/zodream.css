@@ -1,0 +1,13 @@
+#login {
+    margin: 5em;
+}
+
+.fa {
+    color: #05a6b3;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.fa:hover {
+    color: #767676;
+}

@@ -43,3 +43,6 @@ Temporary Items
 .apdisk
 
 tmp/
+node_modules/
+typings/
+.vscode/
