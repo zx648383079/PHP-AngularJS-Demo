@@ -9,19 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var tree_view_1 = require('./tree-view');
-var FolderComponent = (function () {
-    function FolderComponent() {
+var LoginComponent = (function () {
+    function LoginComponent() {
     }
-    FolderComponent = __decorate([
+    LoginComponent.prototype.login = function () {
+        if (!this.password) {
+            this.passwordError = "PASSWORD NOT EMPTY!";
+        }
+        if (!this.username) {
+            this.userError = "USER NAME NOT EMPTY!";
+        }
+    };
+    LoginComponent = __decorate([
         core_1.Component({
-            selector: 'folder-window',
-            templateUrl: 'html/folder.html',
-            directives: [tree_view_1.TreeView]
+            selector: 'my-app',
+            templateUrl: 'html/login.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], FolderComponent);
-    return FolderComponent;
+    ], LoginComponent);
+    return LoginComponent;
 }());
-exports.FolderComponent = FolderComponent;
-//# sourceMappingURL=folder.component.js.map
+exports.LoginComponent = LoginComponent;
+//# sourceMappingURL=login.component.js.map

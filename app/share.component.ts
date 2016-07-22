@@ -7,8 +7,8 @@ import { User } from './user';
 })
 export class ShareComponent {
   
-  public Users: User[];
+  public users: User[];
 
-  public SelectUsers: User[];
+  public selectUsers: User[];
   
 }

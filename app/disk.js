@@ -5,22 +5,22 @@
 })(exports.FileType || (exports.FileType = {}));
 var FileType = exports.FileType;
 var Disk = (function () {
-    function Disk(Id, Name, Parent, Type, Md5, Size, Location, updateTime) {
-        if (Parent === void 0) { Parent = 0; }
-        if (Type === void 0) { Type = FileType.DIR; }
-        if (Md5 === void 0) { Md5 = null; }
-        if (Size === void 0) { Size = 0; }
-        if (Location === void 0) { Location = null; }
-        if (updateTime === void 0) { updateTime = 0; }
-        this.Id = Id;
-        this.Name = Name;
-        this.Parent = Parent;
-        this.Type = Type;
-        this.Md5 = Md5;
-        this.Size = Size;
-        this.Location = Location;
-        this.Checked = false;
-        this.UpdateTime = updateTime instanceof Date ? updateTime : new Date(updateTime);
+    function Disk(id, name, parent, type, md5, size, location, update) {
+        if (parent === void 0) { parent = 0; }
+        if (type === void 0) { type = FileType.DIR; }
+        if (md5 === void 0) { md5 = null; }
+        if (size === void 0) { size = 0; }
+        if (location === void 0) { location = null; }
+        if (update === void 0) { update = 0; }
+        this.id = id;
+        this.name = name;
+        this.parent = parent;
+        this.type = type;
+        this.md5 = md5;
+        this.size = size;
+        this.location = location;
+        this.checked = false;
+        this.updateTime = update instanceof Date ? update : new Date(update);
     }
     return Disk;
 }());

@@ -1,6 +1,6 @@
 <div id="upload" class="zd_upload" v-bind:class="{'min': mode == 1, 'max': mode == 2}">
     <div class="head">
-        <span>{{UploadTitle}}</span>
+        <span>{{title}}</span>
         <i class="fa fa-expand" aria-hidden="true"></i>
         <i class="fa fa-compress" aria-hidden="true"></i>
         <i class="fa fa-times" aria-hidden="true"></i>
@@ -23,24 +23,24 @@
                 操作
             </div>
         </div>
-        <div *ngFor="let item of UploadFiles" class="row">
+        <div *ngFor="let item of files" class="row">
             <div class="col-md-4">
-                {{item.Name}}
+                {{item.name}}
             </div>
             <div class="col-md-2">
-                {{item.Size}}
+                {{item.size}}
             </div>
             <div class="col-md-2">
-                {{item.Parent.Name}}
+                {{item.parent.name}}
             </div>
             <div class="col-md-3 status">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" v-bind:style="{width: item.Process + '%'}">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" v-bind:style="{width: item.process + '%'}">
 
                     </div>
                 </div>
                 <div class="zd_tag">
-                    <span>{{item.Status}}</span> <span v-show="item.status == 0 || item.status == 2">{{ item.Process }}%</span>
+                    <span>{{item.status}}</span> <span v-show="item.status == 0 || item.status == 2">{{ item.process }}%</span>
                 </div>
             </div>
             <div class="col-md-1">

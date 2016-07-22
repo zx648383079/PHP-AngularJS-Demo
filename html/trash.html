@@ -1,0 +1,119 @@
+<div class="container-fluid zd_main">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group menu">
+                <a href="<?=Url::to(['/disk'])?>" class="list-group-item">
+                    <span class="zd_all"></span>全部文件
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/1" class="list-group-item">
+                    <span class="zd_img"></span>图片
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/2" class="list-group-item">
+                    <span class="zd_doc"></span>文档
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/3" class="list-group-item">
+                    <span class="zd_video"></span>视频
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/4" class="list-group-item">
+                    <span class="zd_bt"></span>种子
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/5" class="list-group-item">
+                    <span class="zd_music"></span>音乐
+                </a>
+                <a href="<?=Url::to(['/disk'])?>#category/6" class="list-group-item">
+                    <span class="zd_other"></span>其它
+                </a>
+                <a href="<?=Url::to(['share/my'])?>" class="list-group-item">
+                    <span class="zd_share"></span>我的分享
+                </a>
+                <a href="<?=Url::to(['/trash'])?>" class="list-group-item active">
+                    <span class="zd_trash"></span>回收站
+                </a>
+            </div>
+
+        </div>
+        <div id="content" class="col-md-10">
+            <div class="row">
+                <div class="col-md-offset-10 col-md-2 view-mode">
+                    <button (click)="Clear">
+                        <i class="fa fa-trash" aria-hidden="true"></i>清空回收站</button>
+                </div>
+            </div>
+            <div class="header">
+                <div *ngIf="checkCount < 1" class="row">
+                    <div class="col-md-1">
+                        <span class="checkbox" (click)="checkAll()" [ngClass]="{'checked': checkCount == disks.length}"></span>
+                    </div>
+                    <div class="col-md-6"  (click)="setOrder('name')">
+                        <span>文件名</span>
+                        <span *ngIf="orderKey == 'name' && order > 0" class="glyphicon glyphicon-arrow-up"></span>
+                        <span *ngIf="orderKey == 'name' && order < 0" class="glyphicon glyphicon-arrow-down"></span>
+                    </div>
+                    <div class="col-md-2" (click)="setOrder('size')">
+                        <span>大小</span>
+                        <span *ngIf="orderKey == 'size' && order > 0" class="glyphicon glyphicon-arrow-up"></span>
+                        <span *ngIf="orderKey == 'size' && order < 0" class="glyphicon glyphicon-arrow-down"></span>
+                    </div>
+                    <div class="col-md-3" (click)="setOrder('delete_at')">
+                        <span>删除时间</span>
+                        <span *ngIf="orderKey == 'delete_at' && order > 0" class="glyphicon glyphicon-arrow-up"></span>
+                        <span *ngIf="orderKey == 'delete_at' && order < 0" class="glyphicon glyphicon-arrow-down"></span>
+                    </div>
+                </div>
+                <div *ngIf="checkCount > 0" class="row">
+                    <div class="col-md-1">
+                        <span class="checkbox" (click)="checkAll()" [ngClass]="{'checked': checkCount == disks.length}"></span>
+                    </div>
+                    <div class="col-md-3" style="font-size: 16px">
+                        已选中 {{ checkCount }} 个文件/文件夹
+                    </div>
+                    <div class="col-md-8">
+                        <button (click)="reset()" class="btn btn-default">
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                            还原
+                        </button>
+                        <button (click)="delete()" class="btn btn-default">
+                            <span class="fa fa-trash"></span>
+                            删除
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- END HEADER -->
+            <div class="body">
+                <div class="zd_list">
+                    <div *ngFor="let item of disks" (click)="check(item)" class="row">
+                        <div class="col-md-1">
+                            <span class="checkbox" [ngClass]="{'checked': item.Checked}"></span>
+                        </div>
+                        <div (click).stop="enter(item)" class="col-md-6">
+                            <span [ngClass]="{'zd_s_dir': item.is_dir == 1, 'zd_s_file': item.is_dir != 1}"></span>
+                            <span>{{item.name}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <span>{{item.size | size}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span>{{item.delete}}</span>
+                            <div class="zd_tool">
+                                <i (click).stop="reset(item)" class="fa fa-reply" aria-hidden="true"></i>
+                                <i (click).stop="delete(item)" class="fa fa-trash" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+    </div>
+</div>

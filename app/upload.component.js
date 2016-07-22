@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var UploadComponent = (function () {
     function UploadComponent() {
-        this.UploadTitle = "上传文件";
+        this.title = "上传文件";
     }
     UploadComponent = __decorate([
         core_1.Component({

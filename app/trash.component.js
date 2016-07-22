@@ -9,19 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var tree_view_1 = require('./tree-view');
-var FolderComponent = (function () {
-    function FolderComponent() {
+var TrashComponent = (function () {
+    function TrashComponent() {
+        this.checkCount = 0;
     }
-    FolderComponent = __decorate([
+    TrashComponent.prototype.clear = function () {
+        this.disks = [];
+    };
+    TrashComponent.prototype.delete = function () {
+        this.disks.splice(0, 1);
+    };
+    TrashComponent = __decorate([
         core_1.Component({
-            selector: 'folder-window',
-            templateUrl: 'html/folder.html',
-            directives: [tree_view_1.TreeView]
+            selector: 'my-app',
+            templateUrl: 'html/trash.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], FolderComponent);
-    return FolderComponent;
+    ], TrashComponent);
+    return TrashComponent;
 }());
-exports.FolderComponent = FolderComponent;
-//# sourceMappingURL=folder.component.js.map
+exports.TrashComponent = TrashComponent;
+//# sourceMappingURL=trash.component.js.map

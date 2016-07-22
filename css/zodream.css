@@ -11,3 +11,128 @@
 .fa:hover {
     color: #767676;
 }
+
+.zd_upload {
+    width: 600px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 0;
+    overflow: hidden;
+    display: none;
+    transition: height 2s;
+    -moz-transition: height 2s; /* Firefox 4 */
+    -webkit-transition: height 2s; /* Safari 和 Chrome */
+    -o-transition: height 2s; /* Opera */
+    background: #fff;
+    border-radius: 20px 0 0;
+}
+
+.zd_upload.min,
+.zd_upload.max {
+    display: block;
+}
+.zd_upload.min {
+    height: 50px;
+}
+.zd_upload.max {
+    height: 400px;
+}
+
+.zd_upload .head {
+    border-radius: 20px 0 0;
+    background: green;
+    height: 50px;
+    text-align: right;
+    font-size: 30px;
+    line-height: 50px;
+    color: #fff;
+    padding: 0 10px;
+}
+
+.zd_upload .head span:first-child {
+    float: left;
+    margin-left: 10px;
+}
+
+.zd_upload .head span {
+    cursor: pointer;
+}
+
+.zd_upload .body {
+    padding: 0 16px;
+    overflow: auto;
+    height: 300px;
+}
+
+.zd_upload .body .row:first-child {
+    border-bottom: 1px solid #767676;
+}
+
+.zd_upload .body .row:hover {
+    background-color: rgba(200, 200, 200, .5);
+    color: #f00;
+}
+
+.zd_upload .body .row {
+    height: 20px;
+    overflow: hidden;
+}
+
+.zd_upload .body .row>div{
+    overflow: hidden;
+}
+
+.zd_upload .row .status {
+    padding: 0 2px;
+}
+.zd_upload .row .status .progress {
+margin: 0;
+}
+
+.zd_upload .row .status .zd_tag {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    color: #0f0;
+    font-weight: 700;
+}
+
+.zd_list .row:hover {
+    background: rgba(200, 200, 200, .5);
+}
+
+.zd_list .row:hover>div:last-child span{
+display: none;
+}
+
+.zd_list .row:hover .zd_tool{
+display: block;
+}
+
+.zd_list .zd_tool{
+    display: none;
+}
+
+.zd_grid .zd_icon {
+    text-align: center;
+    border-radius: 0 3px 0 0;
+}
+
+.zd_grid .zd_icon:hover {
+    border: 1px solid #05a6b3;
+}
+
+.zd_grid .zd_icon i:first-child {
+    font-size: 100px;
+}
+
+.zd_grid .zd_icon i:last-child {
+   position: absolute;
+   top:-6px;
+    right: 10px;
+}
+
+.zd_grid .zd_name {
+    text-align: center;
+}

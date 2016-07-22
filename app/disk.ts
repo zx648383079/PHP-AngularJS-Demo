@@ -5,20 +5,20 @@ export enum FileType {
 export class Disk {
 
     public constructor(
-        public Id:number,
-        public Name: string,
-        public Parent: number = 0,
-        public Type: FileType = FileType.DIR,
+        public id:number,
+        public name: string,
+        public parent: number = 0,
+        public type: FileType = FileType.DIR,
         
-        public Md5: string = null,
-        public Size: number = 0,
-        public Location: string = null,
-        updateTime: number|Date = 0
+        public md5: string = null,
+        public size: number = 0,
+        public location: string = null,
+        update: number|Date = 0
     ) {
-        this.UpdateTime = updateTime instanceof Date ? updateTime : new Date(updateTime);
+        this.updateTime = update instanceof Date ? update : new Date(update);
     }
 
-    public Checked: boolean = false;
+    public checked: boolean = false;
 
-    public UpdateTime: Date;
+    public updateTime: Date;
 }

@@ -7,16 +7,16 @@
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active" v-on:click="modeType = 'public'"><a href="#link" aria-controls="link" role="tab" data-toggle="tab">链接分享</a></li>
-                    <li role="presentation" v-on:click="modeType = 'internal'"><a href="#role" aria-controls="role" role="tab" data-toggle="tab">分享到部门</a></li>
-                    <li role="presentation" v-on:click="modeType = 'private'"><a href="#friend" aria-controls="friend" role="tab" data-toggle="tab">分享给好友</a></li>
+                    <li role="presentation" class="active" (click)="modeType = 'public'"><a href="#link" aria-controls="link" role="tab" data-toggle="tab">链接分享</a></li>
+                    <li role="presentation" (click)="modeType = 'internal'"><a href="#role" aria-controls="role" role="tab" data-toggle="tab">分享到部门</a></li>
+                    <li role="presentation" (click)="modeType = 'private'"><a href="#friend" aria-controls="friend" role="tab" data-toggle="tab">分享给好友</a></li>
                 </ul>
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="link">
                         <div class="row">
                             <div class="col-md-4">
-                                <button class="btn btn-primary" v-on:click="create('public')">创建公开链接</button>
+                                <button class="btn btn-primary" (click)="create('public')">创建公开链接</button>
                             </div>
                             <div class="col-md-8">
                                 <p>（文件会出现在你的分享主页，其他人都能查看下载）</p>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <button class="btn btn-primary" v-on:click="create('protected')">创建私密链接</button>
+                                <button class="btn btn-primary" (click)="create('protected')">创建私密链接</button>
                             </div>
                             <div class="col-md-8">
                                 <p>（只有分享的好友能看到，其他人都看不到）</p>
@@ -49,17 +49,17 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <ul class="zd_listbox" id="users">
-                                    <li *ngFor="let item of Users" v-on:click="item.select = !item.select" v-bind:class="{'select': item.select}">{{item.Name}}</li>
+                                    <li *ngFor="let item of users" (click)="item.select = !item.select" v-bind:class="{'select': item.select}">{{item.name}}</li>
                                 </ul>
                             </div>
                             <div class="col-md-2" style="padding-top: 90px;">
-                                <button v-on:click="select" class="btn btn-primary">&gt;&gt;&gt;</button>
-                                <button v-on:click="remove" class="btn btn-primary">&lt;&lt;&lt;</button>
+                                <button (click)="select" class="btn btn-primary">&gt;&gt;&gt;</button>
+                                <button (click)="remove" class="btn btn-primary">&lt;&lt;&lt;</button>
                             </div>
                             <div class="col-md-5">
                                 <input class="form-control" v-on:keyup.enter="getUser" v-model="name" type="text" placeholder="请输入姓名回车键添加">
                                 <ul class="zd_listbox" id="selectUsers" style="height: 190px">
-                                    <li *ngFor="let item of SelectUsers" v-on:click="item.select = !item.select" v-bind:class="{'select': item.select}">{{item.Name}}</li>
+                                    <li *ngFor="let item of selectUsers" (click)="item.select = !item.select" v-bind:class="{'select': item.select}">{{item.name}}</li>
                                 </ul>
                             </div>
                         </div>

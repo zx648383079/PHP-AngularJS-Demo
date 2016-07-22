@@ -12,20 +12,20 @@ var disk_1 = require('./disk');
 })(exports.UploadStatus || (exports.UploadStatus = {}));
 var UploadStatus = exports.UploadStatus;
 var UploadFile = (function () {
-    function UploadFile(Source, Parent) {
-        if (Parent === void 0) { Parent = new disk_1.Disk(0, '全部文件'); }
-        this.Source = Source;
-        this.Parent = Parent;
-        this.Status = UploadStatus.NONE;
+    function UploadFile(source, parent) {
+        if (parent === void 0) { parent = new disk_1.Disk(0, '全部文件'); }
+        this.source = source;
+        this.parent = parent;
+        this.status = UploadStatus.NONE;
     }
-    UploadFile.prototype.GetMd5 = function () {
-        this.Status = UploadStatus.CHECKING;
-        this.Status = UploadStatus.CHECKED;
+    UploadFile.prototype.getMd5 = function () {
+        this.status = UploadStatus.CHECKING;
+        this.status = UploadStatus.CHECKED;
         return true;
     };
-    UploadFile.prototype.Upload = function () {
-        this.Status = UploadStatus.UPLOADING;
-        this.Status = UploadStatus.SUCEESS;
+    UploadFile.prototype.upload = function () {
+        this.status = UploadStatus.UPLOADING;
+        this.status = UploadStatus.SUCEESS;
         return true;
     };
     return UploadFile;

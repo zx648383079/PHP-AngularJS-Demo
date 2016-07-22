@@ -9,9 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var disk_1 = require('./disk');
 var CreateComponent = (function () {
     function CreateComponent() {
+        this.save = new core_1.EventEmitter();
+        this.file = new disk_1.Disk(0, null);
+        this.title = '新建文件夹';
     }
+    CreateComponent.prototype.onSave = function () {
+    };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CreateComponent.prototype, "save", void 0);
     CreateComponent = __decorate([
         core_1.Component({
             selector: 'create-window',

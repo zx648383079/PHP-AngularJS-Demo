@@ -12,35 +12,35 @@ export enum UploadStatus {
 
 export class UploadFile {
     constructor(
-        public Source: any,
-        public Parent: Disk = new Disk(0, '全部文件')
+        public source: any,
+        public parent: Disk = new Disk(0, '全部文件')
     ) {
         
     }
 
-    public Name:string;
+    public name:string;
 
-    public Size:string;
+    public size:string;
 
-    public Md5:string;
+    public md5:string;
 
-    public Status: UploadStatus = UploadStatus.NONE;
+    public status: UploadStatus = UploadStatus.NONE;
 
-    public Progress: number;
+    public progress: number;
 
-    public GetMd5():boolean {
-        this.Status = UploadStatus.CHECKING;
+    public getMd5():boolean {
+        this.status = UploadStatus.CHECKING;
 
         
-        this.Status = UploadStatus.CHECKED;
+        this.status = UploadStatus.CHECKED;
         return true;
     }
 
-    public Upload():boolean {
-        this.Status = UploadStatus.UPLOADING;
+    public upload():boolean {
+        this.status = UploadStatus.UPLOADING;
 
 
-        this.Status = UploadStatus.SUCEESS;
+        this.status = UploadStatus.SUCEESS;
         return true;
     }
 }

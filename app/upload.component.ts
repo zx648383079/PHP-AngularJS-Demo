@@ -7,8 +7,8 @@ import { UploadFile } from './uploadFile';
 })
 export class UploadComponent {
   
-  public UploadFiles: UploadFile[];
+  public files: UploadFile[];
 
-  public UploadTitle:string = "上传文件";
+  public title:string = "上传文件";
   
 }

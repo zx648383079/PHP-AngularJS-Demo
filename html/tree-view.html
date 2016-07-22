@@ -1,0 +1,10 @@
+<ul>
+    <li *ngFor="let item of Directories" [ngClass]="{'open': item.expanded, 'active': item.checked}">
+        <div class="zd_tree_item">
+            <span></span>
+            <span></span>
+            <span>全部文件</span>
+        </div>
+        <tree-view [directories]="item.directories"></tree-view> 
+    </li>
+</ul>

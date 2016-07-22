@@ -9,25 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var TreeView = (function () {
+    function TreeView() {
     }
-    AppComponent.prototype.Login = function () {
-        if (!this.Password) {
-            this.PasswordError = "PASSWORD NOT EMPTY!";
-        }
-        if (!this.Username) {
-            this.UserError = "USER NAME NOT EMPTY!";
-        }
-    };
-    AppComponent = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], TreeView.prototype, "directories", void 0);
+    TreeView = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            templateUrl: 'html/login.html'
+            selector: 'tree-view',
+            templateUrl: 'html/tree-view.html',
+            directives: [TreeView]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], TreeView);
+    return TreeView;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.login.js.map
+exports.TreeView = TreeView;
+//# sourceMappingURL=tree-view.js.map
