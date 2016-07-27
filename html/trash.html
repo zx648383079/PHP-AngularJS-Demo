@@ -1,37 +1,4 @@
-<div class="container-fluid zd_main">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="list-group menu">
-                <a href="<?=Url::to(['/disk'])?>" class="list-group-item">
-                    <span class="zd_all"></span>全部文件
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/1" class="list-group-item">
-                    <span class="zd_img"></span>图片
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/2" class="list-group-item">
-                    <span class="zd_doc"></span>文档
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/3" class="list-group-item">
-                    <span class="zd_video"></span>视频
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/4" class="list-group-item">
-                    <span class="zd_bt"></span>种子
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/5" class="list-group-item">
-                    <span class="zd_music"></span>音乐
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/6" class="list-group-item">
-                    <span class="zd_other"></span>其它
-                </a>
-                <a href="<?=Url::to(['share/my'])?>" class="list-group-item">
-                    <span class="zd_share"></span>我的分享
-                </a>
-                <a href="<?=Url::to(['/trash'])?>" class="list-group-item active">
-                    <span class="zd_trash"></span>回收站
-                </a>
-            </div>
 
-        </div>
         <div id="content" class="col-md-10">
             <div class="row">
                 <div class="col-md-offset-10 col-md-2 view-mode">
@@ -86,14 +53,14 @@
                             <span class="checkbox" [ngClass]="{'checked': item.Checked}"></span>
                         </div>
                         <div (click).stop="enter(item)" class="col-md-6">
-                            <span [ngClass]="{'zd_s_dir': item.is_dir == 1, 'zd_s_file': item.is_dir != 1}"></span>
+                            <i class="fa" [ngClass]="item.checked ? 'fa-check-square-o' : 'fa-square-o'" aria-hidden="true" (click)="check(item)"></i>
                             <span>{{item.name}}</span>
                         </div>
                         <div class="col-md-2">
                             <span>{{item.size | size}}</span>
                         </div>
                         <div class="col-md-3">
-                            <span>{{item.delete}}</span>
+                            <span>{{item.updateTime | date:'yyyy-mm-dd hh:mm:ss' }}</span>
                             <div class="zd_tool">
                                 <i (click).stop="reset(item)" class="fa fa-reply" aria-hidden="true"></i>
                                 <i (click).stop="delete(item)" class="fa fa-trash" aria-hidden="true"></i>
@@ -114,6 +81,3 @@
                 <span></span>
             </div>
         </div>
-
-    </div>
-</div>

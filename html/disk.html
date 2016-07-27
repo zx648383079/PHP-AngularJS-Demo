@@ -1,37 +1,4 @@
-<div class="container-fluid zd_main">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="list-group menu">
-                <a href="<?=Url::to(['/disk'])?>#" class="list-group-item active">
-                    <i class="fa fa-desktop" aria-hidden="true"></i>全部文件
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/1" class="list-group-item">
-                    <i class="fa fa-file-image-o" aria-hidden="true"></i>图片
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/2" class="list-group-item">
-                    <i class="fa fa-briefcase" aria-hidden="true"></i>文档
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/3" class="list-group-item">
-                    <i class="fa fa-film" aria-hidden="true"></i>视频
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/4" class="list-group-item">
-                    <i class="fa fa-link" aria-hidden="true"></i>种子
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/5" class="list-group-item">
-                    <i class="fa fa-music" aria-hidden="true"></i>音乐
-                </a>
-                <a href="<?=Url::to(['/disk'])?>#category/6" class="list-group-item">
-                    <i class="fa fa-file-archive-o" aria-hidden="true"></i>其它
-                </a>
-                <a [routerLink]="['/login']" class="list-group-item">
-                    <i class="fa fa-share-alt" aria-hidden="true"></i>我的分享
-                </a>
-                <a [routerLink]="['/trash']" class="list-group-item">
-                    <i class="fa fa-trash" aria-hidden="true"></i>回收站
-                </a>
-            </div>
 
-        </div>
         <div id="content" class="col-md-10">
             <div class="row">
                 <div class="col-md-2">
@@ -48,12 +15,12 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button *ngIf="!category" class="btn btn-default" data-toggle="modal" data-target="#createModal">
+                    <button *ngIf="!category" class="btn btn-default" (click)="showCreate()">
                         <i class="fa fa-folder" aria-hidden="true"></i>
                         新建文件夹</button>
                 </div>
                 <div class="col-md-offset-6 col-md-2">
-                    <button (click)="Refresh()">
+                    <button (click)="refresh()">
                         <i class="fa fa-refresh" aria-hidden="true"></i>
                     </button>
                     <button [ngClass]="{'active': isList}" (click)="toggle()">
@@ -113,7 +80,7 @@
                             <i class="fa fa-download" aria-hidden="true"></i>
                             下载
                         </button>
-                        <button (click)="deleteAll()" class="btn btn-default">
+                        <button (click)="delete()" class="btn btn-default">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             删除
                         </button>
@@ -134,7 +101,7 @@
             </div> <!-- END HEADER -->
             <div class="body">
                 <div *ngIf="isList" class="zd_list">
-                    <div *ngFor="let item of disks" class="row">
+                    <div *ngFor="let item of disks, let i = index" class="row">
                         <div class="col-md-1">
                             <i class="fa" [ngClass]="item.checked ? 'fa-check-square-o' : 'fa-square-o'" aria-hidden="true" (click)="check(item)"></i>
                         </div>
@@ -149,12 +116,12 @@
                             <span>
                                 {{item.updateTime | date:'yyyy-mm-dd hh:mm:ss' }}</span>
                             <div class="zd_tool">
-                                <i aria-hidden="true" class="fa fa-share-alt"></i>
-                                 <i class="fa fa-download" aria-hidden="true"></i>
-                                <i class="fa fa-scissors" aria-hidden="true"></i>
-                                <i class="fa fa-files-o" aria-hidden="true"></i>
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                <i aria-hidden="true" (click)="share(item)" class="fa fa-share-alt"></i>
+                                <i class="fa fa-download" (click)="download(item)" aria-hidden="true"></i>
+                                <i class="fa fa-scissors" (click)="move(item)" aria-hidden="true"></i>
+                                <i class="fa fa-files-o" (click)="copy(item)" aria-hidden="true"></i>
+                                <i class="fa fa-pencil" (click)="rename(item)" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" (click)="delete(i)" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -186,12 +153,25 @@
             </div>
         </div>
 
-    </div>
-</div>
-
 <upload-window></upload-window>
 
-<create-window></create-window>
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="createModalLabel">{{createTitle}}</h4>
+            </div>
+            <div class="modal-body">
+                <input class="form-control" type="text" [(ngModel)]="file.name" placeholder="文件夹名">
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="createSave()" class="create btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <folder-window></folder-window>
 

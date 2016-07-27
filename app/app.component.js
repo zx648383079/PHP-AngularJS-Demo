@@ -1,3 +1,4 @@
+/// <reference path="../typings/jquery/jquery.d.ts" />
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,44 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var disk_1 = require('./disk');
-var upload_component_1 = require('./upload.component');
-var create_component_1 = require('./create.component');
-var folder_component_1 = require('./folder.component');
-var share_component_1 = require('./share.component');
-var sizePipe_1 = require('./sizePipe');
-var sorter_1 = require('./sorter');
+var common_1 = require('@angular/common');
 var AppComponent = (function () {
-    function AppComponent() {
-        this.isList = true;
-        this.checkCount = 0;
-        this.sorter = new sorter_1.Sorter();
-        this.crumbs = [new disk_1.Disk(0, "全部文件")];
-        this.refresh();
+    function AppComponent(location) {
+        this.location = location;
     }
-    AppComponent.prototype.toggle = function () {
-        this.isList = !this.isList;
-    };
-    AppComponent.prototype.sort = function (key) {
-        this.sorter.sort(key, this.disks);
-    };
-    AppComponent.prototype.refresh = function () {
-        this.disks = [
-            new disk_1.Disk(1, '22222'),
-            new disk_1.Disk(2, '2255'),
-            new disk_1.Disk(3, '2hhhh'),
-            new disk_1.Disk(4, '2222nnnn2'),
-            new disk_1.Disk(5, '22kkkkkkkkkk'),
-        ];
+    AppComponent.prototype.getLinkStyle = function (path) {
+        if (path === this.location.path()) {
+            return true;
+        }
+        else if (path.length > 0) {
+            return this.location.path().indexOf(path) > -1;
+        }
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: 'html/main.html',
-            pipes: [sizePipe_1.SizePipe],
-            directives: [router_1.ROUTER_DIRECTIVES, upload_component_1.UploadComponent, create_component_1.CreateComponent, folder_component_1.FolderComponent, share_component_1.ShareComponent]
+            templateUrl: 'html/app.html',
+            directives: [router_1.ROUTER_DIRECTIVES]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [common_1.Location])
     ], AppComponent);
     return AppComponent;
 }());

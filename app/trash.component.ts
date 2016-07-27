@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Disk } from './disk';
+import { SizePipe } from './sizePipe';
 
 @Component({
   selector: 'my-app',
-  templateUrl: 'html/trash.html'
+  templateUrl: 'html/trash.html',
+  pipes: [SizePipe]
 })
 export class TrashComponent {
     public disks: Disk[];

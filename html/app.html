@@ -1,0 +1,37 @@
+<div class="container-fluid zd_main">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group menu">
+                <a [routerLink]="['/disk']" class="list-group-item active">
+                    <i class="fa fa-desktop" aria-hidden="true"></i>全部文件
+                </a>
+                <a [routerLink]="['/disk', 'id' => 1]" class="list-group-item">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i>图片
+                </a>
+                <a [routerLink]="['/disk', 'id' => 2]" class="list-group-item">
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>文档
+                </a>
+                <a [routerLink]="['/disk', 'id' => 3]" class="list-group-item">
+                    <i class="fa fa-film" aria-hidden="true"></i>视频
+                </a>
+                <a [routerLink]="['/disk', 'id' => 4]" class="list-group-item">
+                    <i class="fa fa-link" aria-hidden="true"></i>种子
+                </a>
+                <a [routerLink]="['/disk', 'id' => 5]" class="list-group-item">
+                    <i class="fa fa-music" aria-hidden="true"></i>音乐
+                </a>
+                <a [routerLink]="['/disk', 'id' => 5]" class="list-group-item">
+                    <i class="fa fa-file-archive-o" aria-hidden="true"></i>其它
+                </a>
+                <a [routerLink]="['/login']" class="list-group-item">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>我的分享
+                </a>
+                <a [routerLink]="['/trash']" class="list-group-item">
+                    <i class="fa fa-trash" aria-hidden="true"></i>回收站
+                </a>
+            </div>
+
+        </div>
+    <router-outlet></router-outlet>
+    </div>
+</div>

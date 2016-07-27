@@ -1,5 +1,5 @@
 import { provideRouter, RouterConfig } from '@angular/router';
-import { AppComponent } from './app.component';
+import { DiskComponent } from './disk.component';
 import { LoginComponent }    from './login.component';
 import { TrashComponent } from './trash.component';
 
@@ -7,7 +7,12 @@ import { TrashComponent } from './trash.component';
  * CLIENT ROUTES
  */
 const routes: RouterConfig = [
-  { path: '', component: AppComponent},
+  {
+    path: '',
+    redirectTo: '/disk',
+    terminal: true
+  },
+  { path: 'disk', component: DiskComponent},
   { path: 'login', component: LoginComponent },
   { path: 'trash', component: TrashComponent }
 ];
